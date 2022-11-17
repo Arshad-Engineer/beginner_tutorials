@@ -122,3 +122,10 @@
 ```
 sudo pip install cpplint
 ```
+## Issues faced:
+- VSCode is earlier configured to 'Intellisense" instead of 'Clang'.
+- This created auto-building everytime the change is made and piled up the commits. Git is removed from source coontrol from VSCode
+- Then C/C++ intellisense extensions are unistalled.
+- Due to above, .basrc is accidentally deleted, resulting in losing of text color in the terminal
+- cpplint installation is also deleted
+- Ran into this issue when I accidentally deleted my ~/.bashrc file. Changing the Profile Preferences as stated in a comment above did not work. Since I completely lost my ~/.bashrc file, I simply copied /etc/skel/.bashrc to ~/.bashrc
