@@ -1,13 +1,14 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ---
 # Overview:
- - Modify Talker node to broadcast a tf frame called /talk with parent /world. The transform should have non-zero translation and rotation. It may be static or time-variant.
+ - This repository is related to tf2, ROS2 bag files & Unit testing, etc..
 
 ## Personnel:
- - Arshad Shaik, UID: 118438832
+ - Arshad S.
 
 ## Dependencies/Requirements: 
-  - Ubuntu 20.04 or higher
+
+ - Ubuntu 20.04 or higher
  - VS Code/Terminal
  - ROS 2 Humble
 
@@ -26,8 +27,7 @@
  - Navigate to your current workspace (if created before)
  - Clone the repo into src directory of your workspace
  ```
- git clone git@github.com:Arshad-Engineer/beginner_tutorials.git
- ```
+ git clone -b Week11_HW git@github.com:Arshad-Engineer/beginner_tutorials.git
 
 ## Build Instructions:
  - Open new terminal & navigate to root of workspace
@@ -66,11 +66,11 @@
 
       - Run server node
       ```
-      ros2 run beginner_tutorials publisher_member_function
+      ros2 run beginner_tutorials node_pubs
       ```
       - Run server node with custom logger level
       ```
-      ros2 run beginner_tutorials subscriber_member_function --ros-args --log-level WARN
+      ros2 run beginner_tutorials node_pubs --ros-args --log-level WARN
       ```
 
   - Running client node (server node should be running):
@@ -89,17 +89,17 @@
 
       - Run client node by changing "string_to_modify" which will be received by client for modification
       ```
-      ros2 run beginner_tutorials subscriber_member_function <string_to_modify>
+      ros2 run beginner_tutorials node_subs <string_to_modify>
       ```
-      - Change one parameter in "publisher_member_function.cpp" from command line
+      - Change one parameter in "node_pubs.cpp" from command line
       ```
       ros2 param set /minimal_param_node my_parameter earth
       ```
 
 ## Run from Launch File:
- - Run launch file which launches all the nodes at once & modifies one parameter in publisher_member_function.cpp
+ - Run launch file which launches all the nodes at once & modifies one parameter in node_pubs.cpp
  ```
- ros2 launch beginner_tutorials tf_launch.py
+ ros2 launch beginner_tutorials node_launch.py
  ```
 
 ## View logs in rqt console:
@@ -112,13 +112,13 @@
  - open another terminal, navigate to ROS 2 workspace and source ROS2
  - Run server node
  ```
- ros2 run beginner_tutorials publisher_member_function
+ ros2 run beginner_tutorials node_pubs
  ```
 
  - open another terminal, navigate to ROS 2 workspace and source ROS2
  - Run client node by changing "string_to_modify" which will be received by client for modification
  ```
- ros2 run beginner_tutorials subscriber_member_function <string_to_modify>
+ ros2 run beginner_tutorials node_subs <string_to_modify>
  ```
 
 ## Command to run static code analysis:
@@ -138,7 +138,19 @@
  ```
  - run the following command
  ```
- cpplint --filter=-build/c++11,+build/c++17,-build/namespaces,-build/include_order publisher_member_function.cpp subscriber_member_function.cpp > ./../results/cpplintreport
+ cpplint --filter=-build/c++11,+build/c++17,-build/namespaces,-build/include_order node_pubs.cpp node_subs.cpp > ./../results/cpplintreport
+ ```
+
+## Command to generate doxygen documentation:
+ - Navigate to src folder in package
+ ```
+ cd <ros2_workspace>/src/beginner_tutorials/src
+ ```
+ - run the following command
+ ```
+ doxygen node_subs.cpp
+ cd html
+ firefox index.html
  ```
 
 ## Dependency Installation: 
